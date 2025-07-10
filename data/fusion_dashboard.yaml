@@ -1,0 +1,202 @@
+theme: muted
+hide_views: false
+hide_sidebar: false
+sidebarWidth: 326
+views:
+  - id: 5415223659106
+    name: Home
+    icon: material-symbols:home
+    sections:
+      - id: 5382748255979
+        name: 🔐 Security & Access
+        items:
+          - type: button
+            id: 9202607056048
+            entity_id: lock.front_door
+            name: Front Door
+            icon: mdi:lock
+            color: '#4CAF50'
+          - type: button
+            id: 9160063555874
+            entity_id: binary_sensor.front_door_contact
+            name: Door Contact
+            icon: mdi:door
+            color: '#2196F3'
+          - type: button
+            id: 9591856791855
+            entity_id: cover.living_room_curtains
+            name: Living Room Curtains
+            icon: mdi:curtains
+            color: '#FF9800'
+      - id: 9645352865626
+        name: 🌡️ Climate Control
+        items:
+          - type: button
+            id: 6231516271558
+            entity_id: climate.thermostat
+            name: Thermostat
+            icon: mdi:thermostat
+            color: '#F44336'
+          - type: button
+            id: 8995261142354
+            entity_id: sensor.thermostat_temperature
+            name: Current Temp
+            icon: mdi:thermometer
+            color: '#FF5722'
+          - type: button
+            id: 3233424250601
+            entity_id: sensor.thermostat_humidity
+            name: Humidity
+            icon: mdi:water-percent
+            color: '#2196F3'
+      - id: 3331097790831
+        name: 🍳 Kitchen
+        items:
+          - type: button
+            id: 7095368067705
+            entity_id: light.sink_light
+            name: Sink Light
+            icon: cbi:perifo-spot
+            color: '#FFEB3B'
+          - type: button
+            id: 6867584656964
+            entity_id: light.stove_light
+            name: Stove Light
+            icon: cbi:perifo-spot
+            color: '#FFEB3B'
+          - type: button
+            id: 9527951569187
+            entity_id: light.front_door_light
+            name: Front Door Light
+            icon: cbi:perifo-spot
+            color: '#FFEB3B'
+      - id: 1855653962682
+        name: 💻 Desk
+        items:
+          - type: button
+            id: 6842763508037
+            entity_id: light.desk_light
+            name: Desk Spotlight
+            icon: cbi:perifo-spot
+            color: '#FFEB3B'
+          - type: button
+            id: 7689495802452
+            entity_id: light.monitor_light
+            name: Monitor Desk Light
+            color: '#9C27B0'
+            icon: mdi:lightbulb-fluorescent-tube
+          - type: button
+            id: 9539463549426
+            entity_id: light.desk_backlight
+            name: Monitor Backlight
+            icon: mdi:lightbulb-fluorescent-tube
+            color: '#E91E63'
+      - id: 1162953082531
+        name: 🛋️ Living Room
+        items:
+          - type: button
+            id: 4249459383753
+            entity_id: binary_sensor.living_room_smart_occupancy_sensor_1497
+            name: Occupancy
+            icon: mdi:motion-sensor
+            color: '#2196F3'
+          - type: button
+            id: 4562057514924
+            entity_id: light.fan_lights
+            name: Fan Lights
+            icon: mdi:ceiling-fan-light
+            color: '#FFEB3B'
+          - type: button
+            id: 4881922849442
+            entity_id: light.living_room_tv_light
+            name: TV Light
+            icon: mdi:television
+            color: '#9C27B0'
+      - id: 4117028705818
+        name: 🛏️ Bedroom
+        items:
+          - type: button
+            id: 1127745256017
+            entity_id: light.bedroom_ceiling
+            name: Ceiling Light
+            icon: mdi:wall-sconce-flat
+            color: '#FFEB3B'
+          - type: button
+            id: 9491398095449
+            entity_id: light.bedroom_light_bars
+            name: Light Bars
+            icon: mdi:led-strip
+            color: '#E91E63'
+          - type: button
+            id: 3219615722680
+            entity_id: binary_sensor.bedroom_smart_occupancy_sensor_cf00
+            name: Occupancy
+            icon: mdi:motion-sensor
+            color: '#2196F3'
+      - id: 5664380026153
+        name: 🚿 Bathroom
+        items:
+          - type: button
+            id: 2374449313287
+            entity_id: light.bathroom_light_switch
+            name: Bathroom Lights
+            color: '#FFEB3B'
+            icon: mdi:vanity-light
+          - type: button
+            id: 8580804000029
+            entity_id: binary_sensor.bathroom_motion_occupancy
+            name: Motion
+            icon: mdi:motion-sensor
+            color: '#FF9800'
+          - type: button
+            id: 2368792240062
+            entity_id: sensor.bathroom_motion_illuminance
+            name: Light Level
+            icon: mdi:brightness-6
+            color: '#FFC107'
+sidebar:
+  - type: time
+    id: 2425390735825
+    hour12: false
+    seconds: false
+  - type: date
+    id: 6573852989290
+    shortday: false
+    shortmonth: false
+  - type: weather
+    id: 9279870186774
+    entity_id: weather.forecast_home
+    icon_pack: meteocons
+    show_apparent: true
+  - type: divider
+    id: 9287882754684
+  - type: sensor
+    id: 6612823440020
+    entity_id: sensor.thermostat_temperature
+    name: Indoor Temperature
+    suffix: °F
+  - type: sensor
+    id: 3773212322368
+    entity_id: sensor.thermostat_humidity
+    name: Indoor Humidity
+    suffix: '%'
+  - type: sensor
+    id: 2856856122462
+    entity_id: sensor.hub_2_0e0d_illuminance
+    name: Living Room Light
+    suffix: ' lux in the living room.'
+    prefix: 'Light level at '
+  - type: divider
+    id: 8617199117062
+  - type: graph
+    id: 7243429816013
+    entity_id: sensor.thermostat_temperature
+    name: Temperature Trend
+    period: day
+    stroke: 2
+  - type: graph
+    id: 5117739199216
+    entity_id: sensor.thermostat_humidity
+    name: Humidity Trend
+    period: day
+    stroke: 2
