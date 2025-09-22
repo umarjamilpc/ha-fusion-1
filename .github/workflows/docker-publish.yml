@@ -1,49 +1,40 @@
-name: Publish Docker image
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }} # This will be owner/repo-name
 
-on:
-  workflow_dispatch:
-  release:
-    types: [published]
+permissions:
+  contents: read
+  packages: write # This permission is required to push images to GHCR
 
 jobs:
-  build-and-push-image:
-    name: Push Docker image to GitHub Packages
+  build-and-push-docker-image:
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
+
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Action to check out your repository code
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to GitHub Docker Registry
-        uses: docker/login-action@v3
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3 # Action to log into a Docker registry
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ github.actor }} # GitHub username
+          password: ${{ secrets.GITHUB_TOKEN }} # Automatically provided GitHub Token
 
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3 # Action to set up Docker Buildx for advanced build features
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v5 # Action to build and push Docker images
         with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          context: . # The build context (usually the root of your repo)
+          push: true # Push the image to the registry
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest # Tag the image with latest
+          # You can add more tags, e.g., ${{ env.REGISTRY }}/${{ IMAGE_NAME }}:${{ github.sha }}
+          platforms: linux/amd64,linux/arm64 # Building for both x86 (amd64) and ARM64
